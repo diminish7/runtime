@@ -1,8 +1,10 @@
+models = require '../models'
 express = require 'express'
 router = express.Router()
 
 # GET users listing.
 router.get '/', (req, res, next) ->
-  res.send({ success: true, message: "This is a user" })
+  models.User.findAll().then (users) ->
+    res.send(users)
 
 module.exports = router
