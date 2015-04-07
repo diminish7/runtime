@@ -22,3 +22,8 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-watch'
 
   grunt.registerTask 'default', ['watch']
+
+  grunt.registerTask 'configure', 'Hydrates JSON files from example files under config', ->
+    grunt.file.expand('./config/*.json.example').forEach (src) ->
+      dest = src.replace(/\.example$/, '')
+      grunt.file.copy(src, dest) unless grunt.file.exists(dest)
