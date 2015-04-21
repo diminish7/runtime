@@ -179,3 +179,14 @@ describe 'User', ->
             expect(newAuthToken).to.equal(authToken)
 
             done()
+
+  describe '#isAuthorized', ->
+    it 'is false if the password is invalid', (done) ->
+      User.create(validParams).then (user) ->
+        expect(user.isAuthorized('invalid-password')).to.beFalse
+        done()
+
+    it 'is true if the password matches', (done) ->
+      User.create(validParams).then (user) ->
+        expect(user.isAuthorized('some-password')).to.beTrue
+        done()

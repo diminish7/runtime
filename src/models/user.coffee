@@ -66,6 +66,9 @@ module.exports = (sequelize, DataTypes) ->
           @setDataValue('authenticationToken', token)
       passwordIsChanging: ->
         @_newPassword? and @_newPassword == @_newPasswordConfirmation
+      isAuthorized: (password) ->
+        hashed = bcrypt.hashSync(password, @getDataValue('passwordSalt'))
+        hashed == @getDataValue('hashedPassword')
     hooks:
       beforeValidate: (user, options, callback) ->
         user.generateSalt()

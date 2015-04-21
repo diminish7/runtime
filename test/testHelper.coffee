@@ -2,8 +2,15 @@ process.env.NODE_ENV = 'test'
 
 _      = require 'underscore'
 async  = require 'async'
+path   = require 'path'
 expect = require('chai').expect
-models = require '../src/models'
+
+rootDir = path.join(__dirname, '..', 'src')
+
+requireFromRoot = (resource) ->
+  require path.join(rootDir, resource)
+
+models = requireFromRoot 'models'
 
 beforeEach (done) ->
   modelNames = _.filter Object.keys(models),
@@ -17,5 +24,8 @@ beforeEach (done) ->
     (err) ->
       done()
 
-module.exports.expect = expect
-module.exports.models = models
+module.exports =
+  expect:          expect
+  models:          models
+  rootDir:         rootDir
+  requireFromRoot: requireFromRoot
