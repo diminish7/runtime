@@ -45,7 +45,7 @@ module.exports = (sequelize, DataTypes) ->
     validate:
       passwordConfirmationMatches: ->
         unless @_newPassword == @_newPasswordConfirmation
-          throw new Error('Password confirmation does not match.')
+          throw new Error('password confirmation does not match')
     setterMethods:
       password: (value) ->
         @_newPassword = value

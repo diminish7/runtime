@@ -6,6 +6,7 @@ logger = require 'morgan'
 bodyParser = require 'body-parser'
 
 routes = require './routes'
+userRoutes = require './routes/users'
 passport = require('./authentication').passport
 
 app = express()
@@ -19,6 +20,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use(passport.initialize())
 
 app.use('/', routes)
+app.use('/users', userRoutes)
 
 # catch 404 and forward to error handler
 app.use (req, res, next) ->

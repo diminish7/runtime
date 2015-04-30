@@ -21,4 +21,7 @@ Object.keys(db).forEach (modelName) ->
 db.sequelize = sequelize
 db.Sequelize = Sequelize
 
+# Setup associations now that models are all loaded
+db.Invitation.belongsTo(db.User)
+
 module.exports = db

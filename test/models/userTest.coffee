@@ -79,21 +79,21 @@ describe 'User', ->
       validUser.set('password', 'some-password')
       validUser.set('passwordConfirmation', null)
       validUser.validate().then (err) ->
-        expect(err.errors[0].message).to.equal('Password confirmation does not match.')
+        expect(err.errors[0].message).to.equal('password confirmation does not match')
         done()
 
     it 'fails if the confirmation is present and the password is not', (done) ->
       validUser.set('password', null)
       validUser.set('passwordConfirmation', 'some-password')
       validUser.validate().then (err) ->
-        expect(err.errors[0].message).to.equal('Password confirmation does not match.')
+        expect(err.errors[0].message).to.equal('password confirmation does not match')
         done()
 
     it 'fails if the password and confirmation are present but not equal', (done) ->
       validUser.set('password', 'some-password')
       validUser.set('passwordConfirmation', 'other-password')
       validUser.validate().then (err) ->
-        expect(err.errors[0].message).to.equal('Password confirmation does not match.')
+        expect(err.errors[0].message).to.equal('password confirmation does not match')
         done()
 
   describe '#generateSalt', ->
